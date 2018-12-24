@@ -1,28 +1,27 @@
 /* eslint-disable jest/no-focused-tests */
-var postcss = require('postcss')
-var path = require('path')
+let postcss = require('postcss')
 
-var plugin = require('./')
+let plugin = require('./')
 
 function run (input, output, opts) {
   return postcss([plugin(opts)])
     .process(input)
-    .then(function (result) {
+    .then(result => {
       expect(result.css).toEqual(output)
       expect(result.warnings()).toHaveLength(0)
     })
 }
 
-it('does something', function () {
+it('does something', () => {
   return run('a{ }', 'a{ }', {})
 })
 
-it('resolves urls', function () {
+it('resolves urls', () => {
   return run(
     "a { background: url('/assets/opo9828c.jpg') }",
-    "a { background: url('http://example.com/wp-content/themes78d01ea36bc481d6e154c691347243e5') }",
+    "a { background: url('http://cdn.io/78d01ea36bc481d6e154c691347243e5') }",
     {
-      baseUrl: 'http://example.com/wp-content/themes',
+      baseUrl: 'http://cdn.io'
       // oss: {
       //   accessKeyId: 'accessKeyId',
       //   accessKeySecret: 'accessKeySecret',

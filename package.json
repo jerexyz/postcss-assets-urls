@@ -1,7 +1,7 @@
 {
   "name": "postcss-assets-urls",
-  "version": "0.0.0",
-  "description": "PostCSS plugin PLUGIN_DESC",
+  "version": "0.1.0",
+  "description": "Postcss plugin for uploads local images to the CDN.",
   "keywords": [
     "postcss",
     "css",
@@ -11,13 +11,13 @@
   "scripts": {
     "test": "jest && eslint *.js"
   },
-  "author": "AUTHOR_NAME <AUTHOR_EMAIL>",
+  "author": "jerexyz <skymine96@gmail.com>",
   "license": "MIT",
-  "repository": "GITHUB_NAME/PLUGIN_NAME",
+  "repository": "git@github.com:jerexyz/postcss-assets-urls.git",
   "bugs": {
-    "url": "https://github.com/GITHUB_NAME/PLUGIN_NAME/issues"
+    "url": "https://github.com/jerexyz/postcss-assets-urls/issues"
   },
-  "homepage": "https://github.com/GITHUB_NAME/PLUGIN_NAME",
+  "homepage": "https://github.com/jerexyz/postcss-assets-urls",
   "dependencies": {
     "ali-oss": "^6.0.2",
     "md5-file": "^4.0.0",
@@ -32,13 +32,14 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jest": "^22.1.2",
     "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-prefer-let": "^1.0.1",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-security": "^1.4.0",
     "eslint-plugin-standard": "^4.0.0",
     "jest": "^23.6.0"
   },
   "eslintConfig": {
-    "extends": "eslint-config-postcss/es5"
+    "extends": "eslint-config-postcss"
   },
   "jest": {
     "testEnvironment": "node"
