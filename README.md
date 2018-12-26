@@ -1,5 +1,7 @@
 # postcss-assets-urls
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/jerexyz/postcss-assets-urls.svg)](https://greenkeeper.io/)
+
 [PostCSS] plugin for uploads local images to the CDN.
 
 [postcss]: https://github.com/postcss/postcss
