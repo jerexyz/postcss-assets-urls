@@ -1,6 +1,6 @@
 {
   "name": "postcss-assets-urls",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Postcss plugin for uploads local images to the CDN.",
   "keywords": [
     "postcss",
@@ -21,7 +21,8 @@
   "dependencies": {
     "ali-oss": "^6.0.2",
     "md5-file": "^4.0.0",
-    "postcss": "^7.0.6"
+    "postcss": "^7.0.6",
+    "qiniu": "^7.2.1"
   },
   "devDependencies": {
     "@logux/eslint-config": "^27.0.0",
