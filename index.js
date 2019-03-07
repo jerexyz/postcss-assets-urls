@@ -4,8 +4,9 @@ let postcss = require('postcss')
 let OSS = require('ali-oss')
 let path = require('path')
 let md5File = require('md5-file')
+let qiniuUpload = require('./qiniu')
 
-function upload (remotePath, localFile, client) {
+function aliossUpload (remotePath, localFile, client) {
   return new Promise((resolve, reject) => {
     try {
       client
@@ -35,7 +36,11 @@ module.exports = postcss.plugin('postcss-assets-urls', opts => {
       decl.value = decl.value.replace(/\/assets\/\S*.(png|svg|jpg)/, match => {
         let file = path.join(process.cwd(), match)
         let hash = md5File.sync(file, match)
-        client && uploadList.push(upload(hash, file, client))
+        let upload = aliossUpload(hash, file, client)
+        if (opts.qiniu) {
+          upload = qiniuUpload(opts.qiniu, file)
+        }
+        client && uploadList.push(upload)
         return [opts.baseUrl || '', hash].join('/')
       })
     })

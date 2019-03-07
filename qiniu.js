@@ -1,8 +1,9 @@
 let qiniu = require('qiniu')
-let md5File = require('md5-file')
 
-
-function qiniuUpload ({ accessKey, secretKey, hash, bucket, localFile, zone }) {
+function qiniuUpload (
+  { accessKey, secretKey, hash, bucket, zone, domain },
+  localFile
+) {
   let mac = new qiniu.auth.digest.Mac(accessKey, secretKey)
 
   let options = {
@@ -22,24 +23,26 @@ function qiniuUpload ({ accessKey, secretKey, hash, bucket, localFile, zone }) {
   }
 
   // file
-  resumeUploader.putFile(
-    uploadToken,
-    null,
-    localFile,
-    putExtra,
-    (respErr, respBody, respInfo) => {
-      if (respErr) {
-        throw respErr
-      }
+  return new Promise((resolve, reject) => {
+    resumeUploader.putFile(
+      uploadToken,
+      null,
+      localFile,
+      putExtra,
+      (respErr, respBody, respInfo) => {
+        if (respErr) {
+          throw respErr
+        }
 
-      if (respInfo.statusCode === 200) {
-        console.log(respBody)
-      } else {
-        console.log(respInfo.statusCode)
-        console.log(respBody)
+        if (respInfo.statusCode === 200) {
+          resolve(domain + '/' + respInfo.data.hash)
+        } else {
+          console.log(respInfo.statusCode)
+          reject(respBody)
+        }
       }
-    }
-  )
+    )
+  })
 }
 
-console.log(md5File.sync('/Volumes/code/github.com/jerexyz/postcss-assets-urls/index.js'))
+module.exports = qiniuUpload
